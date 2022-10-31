@@ -32,8 +32,7 @@ struct list *merge(struct list *head1,struct list *head2)
     }
     else
     {
-        newn=createnode(t2->data);
-        t2=t2->next;
+        newn=createnode(t1->data);
         t1=t1->next;
     }
     head=newn;
@@ -52,9 +51,12 @@ struct list *merge(struct list *head1,struct list *head2)
     }
     else
     {
+        newn=createnode(t1->data);
+        t1=t1->next;
+        tail->next=newn;
+        tail=newn;
         newn=createnode(t2->data);
         t2=t2->next;
-        t1=t1->next;
     }
     tail->next=newn;
     tail=newn;
