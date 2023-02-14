@@ -38,3 +38,16 @@ int coinChange(int* coins, int coinsSize, int amount){
         }
         return b[coinsSize-1][amount];
 }
+
+int main()
+{
+    int coins[3]={1,2,5};
+    int amount=11;
+    int n=coinChange(coins,3,amount);
+    printf("%d",n);
+}
+
+
+
+output:
+3
