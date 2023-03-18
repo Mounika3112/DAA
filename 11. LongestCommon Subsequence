@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <string.h>
+int maximum(int a,int b)
+{
+    if(a>b)
+    return a;
+    return b;
+}
+void LongestCommon(char* str1,char* str2)
+{
+    int n1 = strlen(str1);
+    int n2 = strlen(str2);
+    // printf("%d %d\n",n1,n2);
+    int answer[100][100];
+    int i,j;
+    for(i=0;i<=n2;i++)
+    answer[i][0]=0;
+    for(j=0;j<=n1;j++)
+    answer[0][j]=0;
+    for(i=1;i<=n1;i++)
+    {
+        for(j=1;j<=n2;j++)
+        {
+            if(str1[i-1]==str2[j-1])
+            {
+                answer[i][j]=answer[i-1][j-1]+1;
+            }
+            else
+            {
+                answer[i][j]=maximum(answer[i][j-1],answer[i-1][j]);
+            }
+        }
+    }
+    // for(i=0;i<=n1;i++)
+    // {
+    //     for(j=0;j<=n2;j++)
+    //     {
+    //         printf("%d ",answer[i][j]);
+    //     }
+    //     printf("\n");
+    // }
+    printf("\n%d",answer[n1][n2]);
+}
+int main()
+{
+    char str1[]="abaaba";
+    char str2[]="babbab";
+    printf("Length of longest common sunsequence is \n");
+    LongestCommon(str1,str2);
+    return 0;
+}
