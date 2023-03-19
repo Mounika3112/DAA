@@ -1,0 +1,58 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <limits.h>
+int networkDelay(int times[3][3], int timesSize, int n, int k)
+{
+    int d[n+1];
+    int i,j,flag,c;
+    for(i=1;i<=n;i++)
+    {
+        if(i==k)
+        d[i]=0;
+        else
+        d[i]=INT_MAX;
+    }
+    while(1)
+    {
+        flag=0;
+        for(i=0;i<timesSize;i++)
+        {
+            if(d[times[i][0]]!=INT_MAX)
+            {
+                c=d[times[i][0]]+times[i][2];
+                if(d[times[i][1]]>c)
+                {
+                    d[times[i][1]]=c;
+                    flag=1;
+                }
+            }
+        }
+        if(flag==0)
+        break;
+    }
+    int max=d[1];
+    for(i=1;i<=n;i++)
+    {
+        if(d[i]==INT_MAX)
+        {
+         return -1;
+        }
+        if(d[i]>max)
+        max=d[i];
+    }
+    return max;
+}
+int main()
+{
+    int n,k,timesSize,timesColSize=3;
+    printf("Enter n :");
+    scanf("%d",&n);
+    printf("enter timesSize");
+    scanf("%d",&timesSize);
+    int times[3][3]={{2,1,1},{2,3,1},{3,4,1}};
+    printf("Enter k :");
+    scanf("%d",&k);
+    //int r=networkDelay(times,timesSize,n,k);
+    printf("minimum time taken : %d",networkDelay(times,timesSize,n,k));
+    return 0;
+}
